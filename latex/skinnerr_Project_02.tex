@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+
+\input{skinnerr_Project_02_Preamble.tex}
+
+%%
+%% DOCUMENT START
+%%
+
+\begin{document}
+
+\pagestyle{fancyplain}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{ASEN 6037: Project 2}
+\cfoot{\thepage}
+\rfoot{Ryan Skinner}
+
+\noindent
+{\Large \color{blue} Project 2}
+\hfill
+{\large Ryan Skinner}
+\\[0.5ex]
+{\large ASEN 6037: Turbulence}
+\hfill
+{\large Due 2015/05/08}
+\hrule
+\vspace{12pt}
+
+In this project, we assess the strengths and shortcomings of Reynolds-averaged Navier-Stokes (RANS) models through derivations and comparison to DNS simulations of various flow classes.
+
+\section{Derivation of RANS Models}
+
+Please see the attached handwritten work; much of this problem consists of derivations which are long enough to preclude typesetting in a reasonable amount of time.
+
+\section{Testing of RANS Models: Turbulent Channel Flow}
+
+\subsection{}
+%%
+% Problem 2.1
+%%
+
+Consider a fully-developed turbulent channel flow. In such a flow, which of the components of $\ubar_i$, $\Sbar_{ij}$, and $\Wbar_{ij}$ are non-zero? What are $\tpdd{}{t}$ and $\ubar_i \tpdd{}{x_i}$? Comment on the validity of the equilibrium assumption used in Problem 1.8.
+
+We will assume this turbulent channel flow to be either two- or three-dimensional, with the stream-wise direction denoted by $x$, and the span-wise direction(s) denoted by $y$.
+
+Only $\ubar_x$ is non-zero, since this is the mean direction of flow. Any non-zero $\ubar_y$ would violate symmetry and, if near a wall, also the no-penetration boundary condition.
+
+In the core flow away from the walls, all components of $\Sbar_{ij}$ are zero, since the velocity profile has negligible gradients in all directions ($\tpdd{}{x}$ is identically zero in a fully-developed flow). In the near-wall region, $\Sbar_{ij}$ does have non-zero components, because there is a large velocity gradient in the wall-normal direction. In this region, $\Sbar_{xy}$ is non-zero; it involves the derivative of the stream-wise velocity with respect to the wall-normal direction. All other components are zero because span-wise mean velocities are zero.
+
+In a similar manner, all components of $\Wbar_{ij}$ are zero in the core flow. Again, this is because there exist no substantial velocity gradients in the core region. In the near-wall region, however, hairpin vortices peel off and create preferential vorticity. These structures create zero mean downstream and wall-normal vorticity due to symmetry of the hairpin, but non-zero vorticity in the direction of $(\text{wall-normal} \times \text{stream-wise})$. Taking the channel to be three-dimensional, if we consider the flow direction to be into the page $x$, along the bottom wall (whose normal is in the $y$-direction, pointing into the channel) vorticity will be preferentially in the $-\hat{z}$-direction. Thus, near this wall, $\Wbar_{xy}$ and $\Wbar_{yx}$ will be non-zero. Similar arguments apply to the other walls.
+
+Since the flow is fully-developed, the averages of flow quantities will have no change in time, making $\tpdd{}{t}=0$. However, there will still be fluctuations in the flow for which $\tpdd{}{t} \neq 0$. For the convective derivative, we already know that spatial derivatives in the stream-wise direction must be zero, so $\ubar_x \tpdd{}{x}=0$. Additionally, there are no mean velocities in the span-wise directions, so $\ubar_y=0$. Thus all $\ubar_i \tpdd{}{x_i}=0$.
+
+In conclusion, the equilibrium assumption that postulates constant anisotropy is an acceptable one for average quantities. Though this is not true for fluctuating, instantaneous quantities, we will presumably be using the RANS equations for modelling, in which only average quantities are used.
+
+\subsection{}
+%%
+% Problem 2.2
+%%
+
+
+
+\subsection{}
+%%
+% Problem 2.3
+%%
+
+\subsection{}
+%%
+% Problem 2.4
+%%
+
+\subsection{}
+%%
+% Problem 2.5
+%%
+
+\subsection{}
+%%
+% Problem 2.6
+%%
+
+\subsection{}
+%%
+% Problem 2.7
+%%
+
+\subsection{}
+%%
+% Problem 2.8
+%%
+
+\section{Testing of RANS Models: Unsteady Homogeneous Flow}
+
+\subsection{}
+%%
+% Problem 3.1
+%%
+
+\subsection{}
+%%
+% Problem 3.2
+%%
+
+\subsection{}
+%%
+% Problem 3.3
+%%
+
+\subsection{}
+%%
+% Problem 3.4
+%%
+
+\subsection{}
+%%
+% Problem 3.5
+%%
+
+\subsection{}
+%%
+% Problem 3.6
+%%
+
+\subsection{}
+%%
+% Problem 3.7
+%%
+
+\section{Testing of RANS Models: Computational Fluid Dynamics Code}
+
+\subsection{}
+%%
+% Problem 4.1
+%%
+
+%%
+%% DOCUMENT END
+%%
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
