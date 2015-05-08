@@ -135,22 +135,88 @@ A plot of $C_\mu$ and its average value away from the wall is presented in \figr
 % Problem 2.4
 %%
 
+The closure from problem 1.9,
+\begin{equation}
+a_{ij} =
+-2 \frac{\nu_T}{k} \Sbar_{ij}
+,
+\qquad
+\text{where}
+\qquad
+\nu_T =
+C_\mu \frac{k^2}{\epsilon}
+,
+\label{eq:14}
+\end{equation}
+fails to capture important physical effects near the channel walls. $C_\mu$ should drop significantly in the near-wall region, for roughly $y^+ < 75$, but it does not. This failure occurs for at least two reasons.
 
+First, the gradient transport hypothesis that was used to derive \eqref{eq:14} only holds (if at all) away from the walls. Near the walls, velocities and Reynolds numbers decrease to the point where viscous diffusion plays a large role in the flow dynamics. The gradient transport hypothesis assumes that $Re_\tau$ is high, and that transport within the flow is almost exclusively due to small eddies, rather than large eddies or viscous effects.
+
+Second, we recall from Problem 1.8 that the equilibrium assumption led to the $a_ij$ closure of \eqref{eq:14}, which yielded
+\begin{equation}
+a_{ij} =
+\frac{\alpha_2}{\alpha_1} \frac{k}{\epsilon} \Sbar_{ij} =
+\frac{C2-(4/3)}{(P/\epsilon)-1+C_1} \frac{k}{\epsilon} \Sbar_{ij}
+.
+\end{equation}
+Of note here is that the production term $P$ was neglected when deriving \eqref{eq:14}. Turbulence production is important near the boundaries because of the high mean shear, and it is absent from \eqref{eq:14}.
 
 \subsection{}
 %%
 % Problem 2.5
 %%
 
+A popular approach to improving the closure from \eqref{eq:14} near channel walls is to limit $C_\mu$ such that
+\begin{equation}
+C_\mu =
+\begin{cases}
+0.09 &\text{for $(Sk/\epsilon) \le 3.4$} \\
+0.31(Sk/\epsilon)^{-1} &\text{for $(Sk/\epsilon) > 3.4$}
+\end{cases}
+\end{equation}
+
+This has a positive effect on the model near channel walls. As one approaches the wall, the relative shear strength $(Sk/\epsilon)$ increases dramatically, and this method allows $C_\mu$ to drop continuously from its limit of 0.09 to much smaller values near the wall, inversely proportional to the relative shear strength. According to \figref{fig:part2_Sij}, the strain rate really starts to pick up approaching the wall around $y^+ \approx 50$, and this is roughly where $C_\mu$ would need to start dropping to account for wall effects as seen in \figref{fig:part2_Cmu}.
+
+I would consider this a decent approach to correcting our turbulence model in the near-wall region. It is a model and thus will not be perfect, but it seems to respond to the wall in a physically-justified fashion at the appropriate distance. This presumes that the activation value of $(Sk/\epsilon) = 3.4$ has been chosen in good agreement with empirical data. It is also convenient that the cut-off model for $C_\mu$ is easily computed.
+
 \subsection{}
 %%
 % Problem 2.6
 %%
 
+From a physical perspective, turbulence models have difficulty for $y^+ < 30$ for a number of reasons. First, in deriving models we often make high-$Re$ assumptions that are invalid near the wall. This leads to a neglect of viscous effects as well as anisotropy and turbulence kinetic energy production due to shearing. It is also common to assume that $\epsilon_{ij}$ is isotropic, as noted in Problem 1.5 due to K41 theory, but this too breaks down near the walls. This becomes particularly problematic when these anisotropic turbulent structures form near the walls and are convected into the core flow.
+
+Very close to the walls, the log law,
+\begin{equation}
+y^+ =
+\frac{1}{\kappa} \ln y^+ + B
+,
+\end{equation}
+constitutes a better mathematical function that allows for more accurate prediction of $a_{ij}$. For \emph{very} near-wall physics, the viscous sublayer relationship of $u^+ = y^+$ would be the most accurate.
+
 \subsection{}
 %%
 % Problem 2.7
 %%
+
+If we write $a_{ij}$ using its modelled form from \eqref{eq:14}, we can substitute it into the equation for the Reynolds stresses, yielding, after some simplification,
+\begin{equation}
+\overline{{u'_\alpha}^2} =
+\frac{2}{3}k
+\left(
+1 - C_\mu \frac{k}{\epsilon} \Sbar_{\alpha \alpha}
+\right)
+,
+\end{equation}
+where no summation is implied over Greek indices by convention. However, note that $\Sbar_{\alpha\alpha}$ involves derivatives of mean flow velocities in the same spatial direction. In this flow, mean span-wise velocities are zero, and flow statistics are invariant in the stream-wise direction. Thus $\Sbar_{\alpha\alpha} = 0$ and we are left with the isotropic form
+\begin{equation}
+\overline{{u'_i}^2} = \frac{2}{3} k
+.
+\end{equation}
+
+Referencing \figref{fig:part2_reystress}, the diagonal Reynolds stresses are very much \emph{not constant} in the DNS flow, nor are they equal to one another. The only saving grace of our model is that both it and the DNS results show diagonal Reynolds stresses summing to double the turbulence intensity $k$, but this occurs by definition.
+
+The discrepancies can be explained as follows. First, we dropped all redistribution terms very early on in the derivation of our model. This makes it impossible for anisotropy to move between different components of $a_{ij}$ as fluid parcels are subjected to convection and shear. Additionally, the gradient transport hypothesis we employed assumed that small scale eddies were solely responsible for transport phenomena. Because we dictated that $\epsilon_{ij}$ be isotropic from K41, it comes as little surprise that giving sole dynamic importance to these isotropic small scales results in an isotropic flow at all scales.
 
 \subsection{}
 %%
@@ -159,7 +225,7 @@ A plot of $C_\mu$ and its average value away from the wall is presented in \figr
 
 \section{Testing of RANS Models: Unsteady Homogeneous Flow}
 
-Problems 3.1--3.4 are derivation-heavy; they are not typeset here, but are included in the attached handwritten documents.
+Problems 3.1--3.4 consist mostly of derivations which are not typeset here, but are included in the attached handwritten documents.
 \setcounter{subsection}{4}
 
 \subsection{}

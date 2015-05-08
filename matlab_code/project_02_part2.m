@@ -99,7 +99,7 @@ xlabel(ax2(1),'y/h');
 ylabel(ax1(1),'Anisotropy');
 legend(ax2,fields);
 
-% Plot anisotropy.
+% Plot mean strain rate.
 figure();
 hold on;
 fields = {'dUmean/dy','dWmean/dy'};
@@ -142,11 +142,6 @@ hold off;
 xlabel(ax1(1),'y+');
 xlabel(ax2(1),'y/h');
 ylabel(ax1(1),'C_{mu}');
-
-%%%
-% Problem 2.4
-%%%
-
 
 
 
