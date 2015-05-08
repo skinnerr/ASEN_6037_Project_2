@@ -239,15 +239,69 @@ Problems 3.1--3.4 consist mostly of derivations which are not typeset here, but 
 
 Assuming that $a_{12}=0$ at $t=0$, we numerically integrate the set of ordinary differential equations found in Problem 3.4 for the SKE and DKE models. We take $S^* \equiv S k_0 / \epsilon_0 = 3.3$, and examine the flow evolution for $(\omega/S) = \{0.01,0.1,0.5,1,10\}$. The evolution of $a_{12}$ is plotted as a function of $S \cdot t = S^* \tau$ for each of the $\omega/S$ values and both models. We furthermore assume that $C_\mu = 0.09$ in the SKE model.
 
+Results are shown in Figures \ref{fig:part3_SKE} and \ref{fig:part3_DKE}. For implementation, Matlab's \lstinline|ode45| numerical integration function was used, with initial conditions of $\tilde{k}=\tilde{\epsilon}=1$ and $a_{12}=0$ where applicable.
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part3_SKE.png}
+\vspace{6pt}
+\caption{Evolution of $a_{12}$ as a function of time $(S^* \tau)$ using the SKE model for various values of $\omega/S$.}
+\label{fig:part3_SKE}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part3_DKE.png}
+\vspace{6pt}
+\caption{Evolution of $a_{12}$ as a function of time $(S^* \tau)$ using the DKE model for various values of $\omega/S$.}
+\label{fig:part3_DKE}
+\end{figure}
+
 \subsection{}
 %%
 % Problem 3.6
 %%
 
+Figures \ref{fig:part3_omegaOverS_0p5}, \ref{fig:part3_omegaOverS_1}, and  \ref{fig:part3_omegaOverS_10} present comparisons of the SKE and DKE model results to DNS data from Yu and Girimaji (2006), for $\omega/S = \{0.5,1,10\}$. Note that the authors present $b_{12}$, where $b_{12} = \tfrac{1}{2} a_{12}$.
+
+The DKE model matches DNS data much more closely than the SKE model. As the ratio of shearing frequency to shearing magnitude $(\omega/S)$ increases, the accuracy of the DKE model increases, as evinced by a reduction in phase lag to near zero in the $\omega/S=10$ case, and a reduction in magnitude to approximately match that of the DNS data. The SKE model is decent (though still worse than DKE) for low values of $\omega/S$, but in all comparisons to DNS, the SKE model exhibits excessive phase lag and un-physically high $b_{12}$ amplitude.
+
+As discussed in previous problems, the SKE model treats $C_\mu$ as constant, which fails near the walls and in any locations of high relative shear. In agreement with our observations, we would expect the SKE model to perform poorly in this flow, which undergoes periodic applied shearing.
+
+The DKE model, on the other hand, neglects redistribution and transport terms but retains the production terms that become important in regions of high shear. Understandably, it performs better than the SKE model for the flow in question. Due to its neglect of redistribution terms (which are `rapid' quantities involving derivatives of velocity components) though, phase lag still occurs when the frequency of shearing is high, as seen for $\omega/S = 0.5$ in \figref{fig:part3_omegaOverS_0p5}.
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part3_omegaOverS_0p5.png}
+\vspace{6pt}
+\caption{Comparison of SKE and DKE models to DNS data of Yu and Girimaji (2006) for $\omega/S=0.5$.}
+\label{fig:part3_omegaOverS_0p5}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part3_omegaOverS_1.png}
+\vspace{6pt}
+\caption{Comparison of SKE and DKE models to DNS data of Yu and Girimaji (2006) for $\omega/S=1$.}
+\label{fig:part3_omegaOverS_1}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part3_omegaOverS_10.png}
+\vspace{6pt}
+\caption{Comparison of SKE and DKE models to DNS data of Yu and Girimaji (2006) for $\omega/S=10$.}
+\label{fig:part3_omegaOverS_10}
+\end{figure}
+
 \subsection{}
 %%
 % Problem 3.7
 %%
+
+Our results indicate that the equilibrium approximation---which is made for the SKE model, but not for the DKE model---is inaccurate for unsteady periodically sheared turbulence. The approximation is acceptable if the flow is steady, and does not exhibit decay to isotropy. Since this assumption holds that the convective derivative of the anisotropy tensor is zero, it provides no mechanism for anisotropy generated near a shear layer or wall to decay as it is convected into the core flow. Thus, even steady wall-bounded or sheared flows will have trouble being accurately captured when the equilibrium assumption is used. The ideal case of homogeneous isotropic turbulence in a periodic domain should be simulated accurately with this assumption, as should flow which are similar to HIT and are far from walls.
+
+
 
 \section{Testing of RANS Models: Computational Fluid Dynamics Code}
 
