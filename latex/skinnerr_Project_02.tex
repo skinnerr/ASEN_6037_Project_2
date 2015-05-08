@@ -59,17 +59,83 @@ In conclusion, the equilibrium assumption that postulates constant anisotropy is
 % Problem 2.2
 %%
 
+Using the turbulent channel flow DNS data from Moser, Kim, and Mansour (1999), we calculate and plot the non-zero components of $\ubar_i$, $\overline{u'_i u'_j}$, $k$, $\epsilon$, $a_{ij}$, and $\Sbar_{ij}$ as functions of both $y^+$ and $y/h$. Results are displayed in \figref{fig:part2_ubar} through \figref{fig:part2_Sij}
 
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_ubar.png}
+\vspace{6pt}
+\caption{Mean velocity in the stream-wise direction.}
+\label{fig:part2_ubar}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_reystress.png}
+\vspace{6pt}
+\caption{Components of the Reynolds stress tensor.}
+\label{fig:part2_reystress}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_k.png}
+\vspace{6pt}
+\caption{Turbulence intensity.}
+\label{fig:part2_k}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_epsilon.png}
+\vspace{6pt}
+\caption{Turbulent kinetic energy dissipation.}
+\label{fig:part2_epsilon}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_aij.png}
+\vspace{6pt}
+\caption{Components of the anisotropy tensor.}
+\label{fig:part2_aij}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_Sij.png}
+\vspace{6pt}
+\caption{Components of the mean strain rate tensor; all components not shown are zero. Additionally, $\Sbar_{wv}$ should be zero in an ideal flow because there should be no mean span-wise velocities.}
+\label{fig:part2_Sij}
+\end{figure}
 
 \subsection{}
 %%
 % Problem 2.3
 %%
 
+Using $a_{12}$ and $\Sbar_{12}$, the mean value of the eddy viscosity coefficient $C_\mu$ away from the walls ($y/h > 0.2$) is calculated to be approximately 0.086. This is the constant value that gives the closest agreement between the computational data and the closure model of
+\begin{equation}
+C_\mu =
+\frac{-\epsilon a_{12}}{2k \Sbar_{12}}
+.
+\end{equation}
+A plot of $C_\mu$ and its average value away from the wall is presented in \figref{fig:part2_Cmu}.
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_Cmu.png}
+\vspace{6pt}
+\caption{Eddy viscosity coefficient $C_\mu$ as a function of distance from wall, calculated using $a_{12}$ and $\Sbar_{12}$. The average value is 0.086 for $y/h > 0.2$.}
+\label{fig:part2_Cmu}
+\end{figure}
+
 \subsection{}
 %%
 % Problem 2.4
 %%
+
+
 
 \subsection{}
 %%
@@ -93,30 +159,15 @@ In conclusion, the equilibrium assumption that postulates constant anisotropy is
 
 \section{Testing of RANS Models: Unsteady Homogeneous Flow}
 
-\subsection{}
-%%
-% Problem 3.1
-%%
-
-\subsection{}
-%%
-% Problem 3.2
-%%
-
-\subsection{}
-%%
-% Problem 3.3
-%%
-
-\subsection{}
-%%
-% Problem 3.4
-%%
+Problems 3.1--3.4 are derivation-heavy; they are not typeset here, but are included in the attached handwritten documents.
+\setcounter{subsection}{4}
 
 \subsection{}
 %%
 % Problem 3.5
 %%
+
+Assuming that $a_{12}=0$ at $t=0$, we numerically integrate the set of ordinary differential equations found in Problem 3.4 for the SKE and DKE models. We take $S^* \equiv S k_0 / \epsilon_0 = 3.3$, and examine the flow evolution for $(\omega/S) = \{0.01,0.1,0.5,1,10\}$. The evolution of $a_{12}$ is plotted as a function of $S \cdot t = S^* \tau$ for each of the $\omega/S$ values and both models. We furthermore assume that $C_\mu = 0.09$ in the SKE model.
 
 \subsection{}
 %%
