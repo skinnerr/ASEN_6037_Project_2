@@ -27,21 +27,25 @@ end
 hold off;
 xlabel('Time (S t)');
 ylabel('a_{12}');
-legend(gca,'show');
+title('SKE');
+legend(gca,'show','location','northwest');
 
 figure();
 hold on;
 for i = 1:length(A)
     t_start = t_range(1);
     t_end   = t_range(2) * A(i);
-    init_cond = [0.00001,0.00001];
+    init_cond = [0.00001,0.00001,0.00001];
     [tvec,yvec] = ode45(@ode_a12_DKE,[t_start,t_end],init_cond);
     tvec = tvec / A(i);
     a12 = -Cmu .* yvec(:,1) ./ yvec(:,2) .* Sstar .* sin(tvec);
     plot(tvec,a12,'DisplayName',['w/S = ',num2str(A(i))]);
 end
 hold off;
-legend(gca,'show');
+xlabel('Time (S t)');
+ylabel('a_{12}');
+title('DKE');
+legend(gca,'show','location','northwest');
 
 
 
