@@ -223,6 +223,10 @@ The discrepancies can be explained as follows. First, we dropped all redistribut
 % Problem 2.8
 %%
 
+In conclusion, this closure model is simple and easy to implement, but inaccurate for wall-bounded flows, especially in the near-wall region. Even in the core flow regions, assuming a constant $C_\mu$ is not particularly accurate, as can be seen in \figref{fig:part2_Cmu}. This leads to inaccuracies when simulating flows with small-scale production, such as combustion or wind moving through trees. As we determined by looking at the model's treatment of diagonal Reynolds stresses, flows with any degree of anisotropy will be poorly-represented with this closure model. Having assumed equilibrium, unsteadiness in flows will also be ill-resolved. Idealized flows without boundary layers, without time-varying phenomena, and without any appreciable degree of anisotropy will be resolved fairly well with this turbulence model.
+
+Most real-world engineering flows fall into these categories, which makes it surprising that such a model so so widely-employed in industry. Nonetheless, the simplicity and speed with which the governing equations can be numerically solved is appealing in a production environment. Presumably, these types of models assist with rapid iteration of design. Despite it's shortcomings, this model is probably `good enough' to reach a decent design that can be refined using more experienced humans or higher-fidelity models.
+
 \section{Testing of RANS Models: Unsteady Homogeneous Flow}
 
 Problems 3.1--3.4 consist mostly of derivations which are not typeset here, but are included in the attached handwritten documents.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.5)  7 MAY 2015 23:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.5)  7 MAY 2015 23:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1069,30 +1069,26 @@ Package pdftex.def Info: ../images/part2_Cmu.png used on input line 127.
 NG copy)>] [4 <../images/part2_k.png (PNG copy)> <../images/part2_epsilon.png (
 PNG copy)>] [5 <../images/part2_aij.png (PNG copy)> <../images/part2_Sij.png (P
 NG copy)>] [6] [7] [8 <../images/part2_Cmu.png (PNG copy)>] (./skinnerr_Project
-_02.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+_02.aux) ) 
 Here is how much of TeX's memory you used:
- 24760 strings out of 493105
- 476588 string characters out of 6137073
+ 24766 strings out of 493105
+ 476644 string characters out of 6137073
  538745 words of memory out of 5000000
  27770 multiletter control sequences out of 15000+600000
- 34047 words of font info for 72 fonts, out of 8000000 for 9000
+ 34446 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,12n,54p,10488b,347s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc}</usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y8.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf
-/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf/fonts/type1/public/tex-
-gyre/qplri.pfb>
-Output written on skinnerr_Project_02.pdf (8 pages, 268483 bytes).
+{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc}</usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qplb.pfb></usr/sha
+re/texmf/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf/fonts/type1/pub
+lic/tex-gyre/qplri.pfb>
+Output written on skinnerr_Project_02.pdf (8 pages, 269877 bytes).
 PDF statistics:
  82 PDF objects out of 1000 (max. 8388607)
  54 compressed objects within 1 object stream
