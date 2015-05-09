@@ -220,7 +220,7 @@ Governing equations can be found in the literature, in an encyclopedia, and in t
 
 \subsubsection{Spalart-Allmaras model}
 
-This is a simple one-equation model, which solves a modelled transport equation for the kinematic eddy viscosity. It performs well for wall-bounded flows, and flows which involve a combination of boundary layers and adverse pressure gradients. These are particularly common in aerospace and turbomachinery applications. It is an equilibrium model, and as such does not predict the decay of homogeneous isotropic turbulence (HIT). It is also unable to correctly predict behaviour of flow that rapidly transitions from wall-bounded to free shear, since length scales are assumed to change slowly in this model.
+This is a simple one-equation model, which solves a modelled transport equation for the kinematic eddy viscosity. It performs well for wall-bounded flows, and flows which involve a combination of boundary layers and adverse pressure gradients. These are particularly common in aerospace and turbomachinery applications. It is an equilibrium model, and as such does not predict the decay of homogeneous isotropic turbulence (HIT). It is also unable to correctly predict behaviour of flow that rapidly transitions from wall-bounded to free shear, since length scales are assumed to change slowly in this model. A Spalart-Allmaras based detached eddy simulation (DES) model is available in Fluent.
 
 \subsubsection{Standard $k$-$\epsilon$ model}
 
@@ -232,7 +232,7 @@ This model is similar to the SKE model. It performs better in flows subjected to
 
 \subsubsection{Realizable $k$-$\epsilon$ model}
 
-As with the RNG $k$-$\epsilon$ model, the realizable $k$-$\epsilon$ model modifies the SKE model; in this case, by re-formulating the turbulent viscosity $\nu_T$ and the transport equation for $\epsilon$. In a sense, this model is more physical in that it only produces physically-realizable turbulence, unlike the previous two $k$-$\epsilon$ models. $C_\mu$ is also taken to be variable rather than constant, which allows improved prediction of the spreading rates of jets. In almost all practical situations, it outperforms the SKE model. However, it produces unphysical turbulent viscosities in cases where the domain contains both rotating and stationary regions of fluid. It is also an equilibrium formulation, with similar physical assumptions to the SKE model. It is a two-equation model.
+As with the RNG $k$-$\epsilon$ model, the realizable $k$-$\epsilon$ model modifies the SKE model; in this case, by re-formulating the turbulent viscosity $\nu_T$ and the transport equation for $\epsilon$. In a sense, this model is more physical in that it only produces physically-realizable turbulence, unlike the previous two $k$-$\epsilon$ models. $C_\mu$ is also taken to be variable rather than constant, which allows improved prediction of the spreading rates of jets. In almost all practical situations, it outperforms the SKE model. However, it produces unphysical turbulent viscosities in cases where the domain contains both rotating and stationary regions of fluid. It is also an equilibrium formulation, with similar physical assumptions to the SKE model. It is a two-equation model, and a realizable $k$-$\epsilon$ based DES model is available in Fluent.
 
 \subsubsection{Standard $k$-$\omega$ model}
 
@@ -240,11 +240,11 @@ The standard $k$-$\omega$ model is a modification of the standard $k$-$\epsilon$
 
 \subsubsection{Shear-stress transport (SST) $k$-$\omega$ model}
 
-The SST $k$-$\omega$ model combines the standard $k$-$\omega$ model with the standard $k$-$\epsilon$ model, to leverage improved near-wall accuracy of the former while retaining far-field accuracy of the latter. Again, physical assumptions including the GTH are the same as in both of its `parent' models. Combination of the models is attained with a blending function, which activates one model or the other depending on which is more appropriate at a given location and time. This flow is more applicable to aeronautical flows than the standard $k$-$\omega$ model. It is still an equilibrium formulation. It is a two-equation model.
+The SST $k$-$\omega$ model combines the standard $k$-$\omega$ model with the standard $k$-$\epsilon$ model, to leverage improved near-wall accuracy of the former while retaining far-field accuracy of the latter. Again, physical assumptions including the GTH are the same as in both of its `parent' models. Combination of the models is attained with a blending function, which activates one model or the other depending on which is more appropriate at a given location and time. This flow is more applicable to aeronautical flows than the standard $k$-$\omega$ model. It is still an equilibrium formulation. It is a two-equation model. A SST $k$-$\omega$ based DES model is available in Fluent.
 
 \subsubsection{$v^2$-$f$ model}
 
-Similar to the standard $k$-$\epsilon$ model, the $v^2$-$f$ model further seeks to resolve near-wall turbulence anisotropy and non-local pressure-strain correlations. It is intended for low-$Re$ flows, and is valid even immediately at solid boundaries.
+Similar to the standard $k$-$\epsilon$ model, the $v^2$-$f$ model further seeks to resolve near-wall turbulence anisotropy and non-local pressure-strain correlations. It is intended for low-$Re$ flows, and is valid even immediately at solid boundaries. This model is accurate for separation-dominated flows. What differentiates it from previously-discussed models is its use of a velocity scale $\overline{v^2}$ rather than the turbulence kinetic energy $k$ to evaluate the eddy viscosity $\nu_T$. This is precisely the region that the model behaves well as it approaches no-slip boundaries. It is also an equilibrium model, and is presumably two-equation.
 
 \subsubsection{Transition $k$-$kl$-$\omega$ model}
 
@@ -254,13 +254,33 @@ The $k$-$kl$-$\omega$ model is a three-equation model, composed of transport equ
 
 This model augments the SST $k$-$\omega$ model with additional transport equations, specifically tuned to model turbulent transition. It does an acceptable job of predicting the decay of turbulent intensity. It also requires a fairly fine mesh near the wall, with characteristic grid dimension of approximately $y^+ \approx 1$. All approximations and physical limitations of the SST $k$-$\omega$ model apply here, save that this model is superior for transitional flows and requires the simultaneous solution of two more equations, one for the transition onset criterion and one for the intermittency. It is thus a four-equation model.
 
-\subsubsection{Linear pressure-strain Reynolds stress model}
+\subsubsection{Reynolds stress models}
 
-\subsubsection{Quadratic pressure-strain Reynolds stress model}
+As we begin discussing Reynolds stress models (RSM), it should be noted that they drop the isotropic eddy-viscosity hypothesis used in all previously-mentioned models. This class of models closes the RANS equations by solving governing equations for $\overline{u'_i u'_j}$ and the dissipation rate. Depending on the domain rank, these models employ either 5 or 7 equations.
 
-\subsubsection{Low-$Re$ stress-omega Reynolds stress model}
+This extra mathematical machinery allows RSMs to account for streamline curvature, swirl, rotation, and rapid changes in strain rate, making them better-suited to complex flow applications. However, the closure used for the pressure-strain and dissipation rate leaves much to be desired, and leads to erroneous results in many simulations. That said, these models excel in cases where the flow physics are dominated by highly-anisotropic Reynolds stresses.
+
+The linear pressure-strain RSM models the pressure-strain term as a linear differential equation, and is the most basic RSM.
+
+The quadratic pressure-strain RSM adds complexity to the pressure-strain term, but offers improved performance for a number of canonical shear flows. These include plane strain, rotating plane shear, axisymmetric expansion and contraction, and can be extended to engineering flows with high streamline curvature.
+
+Finally, the low-$Re$ stress-omega RSM is similar to the $k$-$\omega$ model in applicability to a wide host of flows. It retains the improved accuracy of the general class of Reynolds stress models, but improves near-wall simulations.
 
 \subsubsection{LES models}
+
+Fluent offers a number of LES implementations, with subgrid-scale models of the Smagorinsky-Lilly, WALE, dynamic Smagorinsky, and kinetic energy transport variants. They require a substantial investment in computational resources, but can result in much improved accuracy.
+
+\section*{Appendix: Matlab Code}
+
+\lstinputlisting[caption=\lstinline|project_02_part2.m|]{../matlab_code/project_02_part2.m}
+
+\lstinputlisting[caption=\lstinline|project_02_part3.m|]{../matlab_code/project_02_part3.m}
+
+\lstinputlisting[caption=\lstinline|read_MKM_data.m|]{../matlab_code/read_MKM_data.m}
+
+\lstinputlisting[caption=\lstinline|ode_a12_SKE.m|]{../matlab_code/ode_a12_SKE.m}
+
+\lstinputlisting[caption=\lstinline|ode_a12_DKE.m|]{../matlab_code/ode_a12_DKE.m}
 
 %%%
 % Figures
@@ -361,18 +381,6 @@ This model augments the SST $k$-$\omega$ model with additional transport equatio
 \caption{Comparison of SKE and DKE models to DNS data of Yu and Girimaji (2006) for $\omega/S=10$.}
 \label{fig:part3_omegaOverS_10}
 \end{figure}
-
-\section*{Appendix: Matlab Code}
-
-\lstinputlisting[caption=\lstinline|project_02_part2.m|]{../matlab_code/project_02_part2.m}
-
-\lstinputlisting[caption=\lstinline|project_02_part3.m|]{../matlab_code/project_02_part3.m}
-
-\lstinputlisting[caption=\lstinline|read_MKM_data.m|]{../matlab_code/read_MKM_data.m}
-
-\lstinputlisting[caption=\lstinline|ode_a12_SKE.m|]{../matlab_code/ode_a12_SKE.m}
-
-\lstinputlisting[caption=\lstinline|ode_a12_DKE.m|]{../matlab_code/ode_a12_DKE.m}
 
 %%
 %% DOCUMENT END
