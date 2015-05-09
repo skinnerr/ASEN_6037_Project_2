@@ -142,16 +142,3 @@ hold off;
 xlabel(ax1(1),'y+');
 xlabel(ax2(1),'y/h');
 ylabel(ax1(1),'C_{mu}');
-
-
-
-
-
-
-
-
-
-
-
-
-

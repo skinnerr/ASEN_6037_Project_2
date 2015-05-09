@@ -59,55 +59,7 @@ In conclusion, the equilibrium assumption that postulates constant anisotropy is
 % Problem 2.2
 %%
 
-Using the turbulent channel flow DNS data from Moser, Kim, and Mansour (1999), we calculate and plot the non-zero components of $\ubar_i$, $\overline{u'_i u'_j}$, $k$, $\epsilon$, $a_{ij}$, and $\Sbar_{ij}$ as functions of both $y^+$ and $y/h$. Results are displayed in \figref{fig:part2_ubar} through \figref{fig:part2_Sij}
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_ubar.png}
-\vspace{6pt}
-\caption{Mean velocity in the stream-wise direction.}
-\label{fig:part2_ubar}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_reystress.png}
-\vspace{6pt}
-\caption{Components of the Reynolds stress tensor.}
-\label{fig:part2_reystress}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_k.png}
-\vspace{6pt}
-\caption{Turbulence intensity.}
-\label{fig:part2_k}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_epsilon.png}
-\vspace{6pt}
-\caption{Turbulent kinetic energy dissipation.}
-\label{fig:part2_epsilon}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_aij.png}
-\vspace{6pt}
-\caption{Components of the anisotropy tensor.}
-\label{fig:part2_aij}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_Sij.png}
-\vspace{6pt}
-\caption{Components of the mean strain rate tensor; all components not shown are zero. Additionally, $\Sbar_{wv}$ should be zero in an ideal flow because there should be no mean span-wise velocities.}
-\label{fig:part2_Sij}
-\end{figure}
+Using the turbulent channel flow DNS data from Moser, Kim, and Mansour (1999), we calculate and plot the non-zero components of $\ubar_i$, $\overline{u'_i u'_j}$, $k$, $\epsilon$, $a_{ij}$, and $\Sbar_{ij}$ as functions of both $y^+$ and $y/h$. Results are displayed in \figref{fig:part2_ubar} through \figref{fig:part2_Sij}.
 
 \subsection{}
 %%
@@ -121,14 +73,6 @@ C_\mu =
 .
 \end{equation}
 A plot of $C_\mu$ and its average value away from the wall is presented in \figref{fig:part2_Cmu}.
-
-\begin{figure}[p]
-\centering
-\includegraphics[scale=0.85]{part2_Cmu.png}
-\vspace{6pt}
-\caption{Eddy viscosity coefficient $C_\mu$ as a function of distance from wall, calculated using $a_{12}$ and $\Sbar_{12}$. The average value is 0.086 for $y/h > 0.2$.}
-\label{fig:part2_Cmu}
-\end{figure}
 
 \subsection{}
 %%
@@ -241,6 +185,143 @@ Assuming that $a_{12}=0$ at $t=0$, we numerically integrate the set of ordinary 
 
 Results are shown in Figures \ref{fig:part3_SKE} and \ref{fig:part3_DKE}. For implementation, Matlab's \lstinline|ode45| numerical integration function was used, with initial conditions of $\tilde{k}=\tilde{\epsilon}=1$ and $a_{12}=0$ where applicable.
 
+\subsection{}
+%%
+% Problem 3.6
+%%
+
+Figures \ref{fig:part3_omegaOverS_0p5}, \ref{fig:part3_omegaOverS_1}, and  \ref{fig:part3_omegaOverS_10} present comparisons of the SKE and DKE model results to DNS data from Yu and Girimaji (2006), for $\omega/S = \{0.5,1,10\}$. Note that the authors present $b_{12}$, where $b_{12} = \tfrac{1}{2} a_{12}$.
+
+The DKE model matches DNS data much more closely than the SKE model. As the ratio of shearing frequency to shearing magnitude $(\omega/S)$ increases, the accuracy of the DKE model increases, as evinced by a reduction in phase lag to near zero in the $\omega/S=10$ case, and a reduction in magnitude to match that of the DNS data almost identically. The SKE model is decent (though still worse than DKE) for low values of $\omega/S$, but in all comparisons to DNS, the SKE model exhibits excessive phase lag and un-physically high $a_{12}$ amplitude.
+
+As discussed in previous problems, the SKE model treats $C_\mu$ as constant, which fails near the walls and in any locations of high relative shear. In agreement with our observations, we would expect the SKE model to perform poorly in this flow, which undergoes periodic applied shearing.
+
+The DKE model, on the other hand, neglects redistribution and transport terms but retains the production terms that become important in regions of high shear. Understandably, it performs better than the SKE model for the flow in question. Due to its neglect of redistribution terms (which are `rapid' quantities involving derivatives of velocity components) though, phase lag still occurs when the frequency of shearing is high, as seen for $\omega/S = 0.5$ in \figref{fig:part3_omegaOverS_0p5}.
+
+\subsection{}
+%%
+% Problem 3.7
+%%
+
+Our results indicate that the equilibrium approximation---which is made for the SKE model, but not for the DKE model---is inaccurate for unsteady periodically sheared turbulence. The approximation is acceptable if the flow is steady, and does not exhibit decay to isotropy. Since this assumption holds that the convective derivative of the anisotropy tensor is zero, it provides no mechanism for anisotropy generated near a shear layer or wall to decay as it is convected into the core flow. Thus, even steady wall-bounded or sheared flows will have trouble being accurately captured when the equilibrium assumption is used. The ideal case of homogeneous isotropic turbulence in a periodic domain should be simulated accurately with this assumption, as should flow which are similar to HIT and are far from walls.
+
+The gradient transport hypothesis was used to write $a_{ij} \sim \Sbar_{ij}$. In flows where the mean shear rate is low, this is a fairly good assumption because most of the transport is due to small-scale turbulent motions. However, a high mean shear rate creates large scale turbulent eddies. These important transport mechanisms are not accounted for by the gradient transport hypothesis, which is why in our SKE model is highly inaccurate.
+
+\section{Testing of RANS Models: Computational Fluid Dynamics Code}
+
+\subsection{}
+%%
+% Problem 4.1
+%%
+
+We now examine the turbulence models offered by Ansys Fluent. A brief explanation of each model follows, with physical assumptions and neglected effects and formulation type. Models which can be used for detached eddy simulation (DES) are addressed in a single category at the end. A similar approach is taken for large eddy simulation (LES) models.
+
+Governing equations can be found in the literature, in an encyclopedia, and in the Fluent Theory Guide. They will not be typeset here, but rather discussed in qualitative detail.
+
+\subsubsection{Spalart-Allmaras model}
+
+This is a simple one-equation model, which solves a modelled transport equation for the kinematic eddy viscosity. It performs well for wall-bounded flows, and flows which involve a combination of boundary layers and adverse pressure gradients. These are particularly common in aerospace and turbomachinery applications. It is an equilibrium model, and as such does not predict the decay of homogeneous isotropic turbulence (HIT). It is also unable to correctly predict behaviour of flow that rapidly transitions from wall-bounded to free shear, since length scales are assumed to change slowly in this model.
+
+\subsubsection{Standard $k$-$\epsilon$ model}
+
+This model, referred to in previous parts of the project as SKE, is one of the simplest models. As we have seen, it requires the coupled solution of two separate transport equations for turbulence intensity $k$, and dissipation $\epsilon$. The former is physically accurate, whereas the latter is derived using physical arguments such as the gradient transport hypothesis (GTH). Physical assumptions include the presence of fully-turbulent flow and negligible molecular viscosity. Constants in the model are empirically determined, and the turbulent viscosity $C_\mu$ is taken to be a constant. The validity of this assumption was the subject of Part 2. It offers reasonable accuracy for a wide variety of flows, and is considered both numerically stable and computationally efficient in many situations. It is also an equilibrium formulation and a two-equation model.
+
+\subsubsection{Renormalization group (RNG) $k$-$\epsilon$ model}
+
+This model is similar to the SKE model. It performs better in flows subjected to rapid straining and swirling, as well as in flows with low-$Re$ effects if tuned properly. These benefits are achieved through statistical arguments that result in an additional $\epsilon$-equation term, the inclusion of swirl physics, and rewriting the effective viscosity to account for low Reynolds numbers. Of note is that the RNG $k$-$\epsilon$ model is superior to the SKE model in cases with high streamline curvature. It is also an equilibrium formulation, with similar physical assumptions to the SKE model. It is a two-equation model.
+
+\subsubsection{Realizable $k$-$\epsilon$ model}
+
+As with the RNG $k$-$\epsilon$ model, the realizable $k$-$\epsilon$ model modifies the SKE model; in this case, by re-formulating the turbulent viscosity $\nu_T$ and the transport equation for $\epsilon$. In a sense, this model is more physical in that it only produces physically-realizable turbulence, unlike the previous two $k$-$\epsilon$ models. $C_\mu$ is also taken to be variable rather than constant, which allows improved prediction of the spreading rates of jets. In almost all practical situations, it outperforms the SKE model. However, it produces unphysical turbulent viscosities in cases where the domain contains both rotating and stationary regions of fluid. It is also an equilibrium formulation, with similar physical assumptions to the SKE model. It is a two-equation model.
+
+\subsubsection{Standard $k$-$\omega$ model}
+
+The standard $k$-$\omega$ model is a modification of the standard $k$-$\epsilon$ model. Its formulation is similarly lacking in physical justification, but $\epsilon$ is replaced with an inverse turbulence time scale $\omega$. It is still an equilibrium formulation, but offers slightly improved performance in the near-wall boundary layer region due to better handling of transport effects from the principal turbulent shear stress. This comes at an expense, however, since its accuracy is degraded away from walls. Physical assumptions not mentioned here are identical to the $k$-$\epsilon$ model, including use of the GTH. It is a two-equation model.
+
+\subsubsection{Shear-stress transport (SST) $k$-$\omega$ model}
+
+The SST $k$-$\omega$ model combines the standard $k$-$\omega$ model with the standard $k$-$\epsilon$ model, to leverage improved near-wall accuracy of the former while retaining far-field accuracy of the latter. Again, physical assumptions including the GTH are the same as in both of its `parent' models. Combination of the models is attained with a blending function, which activates one model or the other depending on which is more appropriate at a given location and time. This flow is more applicable to aeronautical flows than the standard $k$-$\omega$ model. It is still an equilibrium formulation. It is a two-equation model.
+
+\subsubsection{$v^2$-$f$ model}
+
+Similar to the standard $k$-$\epsilon$ model, the $v^2$-$f$ model further seeks to resolve near-wall turbulence anisotropy and non-local pressure-strain correlations. It is intended for low-$Re$ flows, and is valid even immediately at solid boundaries.
+
+\subsubsection{Transition $k$-$kl$-$\omega$ model}
+
+The $k$-$kl$-$\omega$ model is a three-equation model, composed of transport equations for the following quantities: inverse turbulent time scale $\omega$, turbulent kinetic energy $k_T$, and laminar kinetic energy $k_L$. Its primary area of application is boundary layer development, and is used to calculate the location at which the laminar-turbulent transition begins. As such, it has been specifically tailored to this need and neglects physics which do not apply near a boundary layer.
+
+\subsubsection{Transition SST model}
+
+This model augments the SST $k$-$\omega$ model with additional transport equations, specifically tuned to model turbulent transition. It does an acceptable job of predicting the decay of turbulent intensity. It also requires a fairly fine mesh near the wall, with characteristic grid dimension of approximately $y^+ \approx 1$. All approximations and physical limitations of the SST $k$-$\omega$ model apply here, save that this model is superior for transitional flows and requires the simultaneous solution of two more equations, one for the transition onset criterion and one for the intermittency. It is thus a four-equation model.
+
+\subsubsection{Linear pressure-strain Reynolds stress model}
+
+\subsubsection{Quadratic pressure-strain Reynolds stress model}
+
+\subsubsection{Low-$Re$ stress-omega Reynolds stress model}
+
+\subsubsection{LES models}
+
+%%%
+% Figures
+%%%
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_ubar.png}
+\vspace{6pt}
+\caption{Mean velocity in the stream-wise direction.}
+\label{fig:part2_ubar}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_reystress.png}
+\vspace{6pt}
+\caption{Components of the Reynolds stress tensor.}
+\label{fig:part2_reystress}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_k.png}
+\vspace{6pt}
+\caption{Turbulence intensity.}
+\label{fig:part2_k}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_epsilon.png}
+\vspace{6pt}
+\caption{Turbulent kinetic energy dissipation.}
+\label{fig:part2_epsilon}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_aij.png}
+\vspace{6pt}
+\caption{Components of the anisotropy tensor.}
+\label{fig:part2_aij}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_Sij.png}
+\vspace{6pt}
+\caption{Components of the mean strain rate tensor; all components not shown are zero. Additionally, $\Sbar_{wv}$ should be zero in an ideal flow because there should be no mean span-wise velocities.}
+\label{fig:part2_Sij}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[scale=0.85]{part2_Cmu.png}
+\vspace{6pt}
+\caption{Eddy viscosity coefficient $C_\mu$ as a function of distance from wall, calculated using $a_{12}$ and $\Sbar_{12}$. The average value is 0.086 for $y/h > 0.2$.}
+\label{fig:part2_Cmu}
+\end{figure}
+
 \begin{figure}[p]
 \centering
 \includegraphics[scale=0.85]{part3_SKE.png}
@@ -256,19 +337,6 @@ Results are shown in Figures \ref{fig:part3_SKE} and \ref{fig:part3_DKE}. For im
 \caption{Evolution of $a_{12}$ as a function of time $(S^* \tau)$ using the DKE model for various values of $\omega/S$.}
 \label{fig:part3_DKE}
 \end{figure}
-
-\subsection{}
-%%
-% Problem 3.6
-%%
-
-Figures \ref{fig:part3_omegaOverS_0p5}, \ref{fig:part3_omegaOverS_1}, and  \ref{fig:part3_omegaOverS_10} present comparisons of the SKE and DKE model results to DNS data from Yu and Girimaji (2006), for $\omega/S = \{0.5,1,10\}$. Note that the authors present $b_{12}$, where $b_{12} = \tfrac{1}{2} a_{12}$.
-
-The DKE model matches DNS data much more closely than the SKE model. As the ratio of shearing frequency to shearing magnitude $(\omega/S)$ increases, the accuracy of the DKE model increases, as evinced by a reduction in phase lag to near zero in the $\omega/S=10$ case, and a reduction in magnitude to approximately match that of the DNS data. The SKE model is decent (though still worse than DKE) for low values of $\omega/S$, but in all comparisons to DNS, the SKE model exhibits excessive phase lag and un-physically high $b_{12}$ amplitude.
-
-As discussed in previous problems, the SKE model treats $C_\mu$ as constant, which fails near the walls and in any locations of high relative shear. In agreement with our observations, we would expect the SKE model to perform poorly in this flow, which undergoes periodic applied shearing.
-
-The DKE model, on the other hand, neglects redistribution and transport terms but retains the production terms that become important in regions of high shear. Understandably, it performs better than the SKE model for the flow in question. Due to its neglect of redistribution terms (which are `rapid' quantities involving derivatives of velocity components) though, phase lag still occurs when the frequency of shearing is high, as seen for $\omega/S = 0.5$ in \figref{fig:part3_omegaOverS_0p5}.
 
 \begin{figure}[p]
 \centering
@@ -294,21 +362,17 @@ The DKE model, on the other hand, neglects redistribution and transport terms bu
 \label{fig:part3_omegaOverS_10}
 \end{figure}
 
-\subsection{}
-%%
-% Problem 3.7
-%%
+\section*{Appendix: Matlab Code}
 
-Our results indicate that the equilibrium approximation---which is made for the SKE model, but not for the DKE model---is inaccurate for unsteady periodically sheared turbulence. The approximation is acceptable if the flow is steady, and does not exhibit decay to isotropy. Since this assumption holds that the convective derivative of the anisotropy tensor is zero, it provides no mechanism for anisotropy generated near a shear layer or wall to decay as it is convected into the core flow. Thus, even steady wall-bounded or sheared flows will have trouble being accurately captured when the equilibrium assumption is used. The ideal case of homogeneous isotropic turbulence in a periodic domain should be simulated accurately with this assumption, as should flow which are similar to HIT and are far from walls.
+\lstinputlisting[caption=\lstinline|project_02_part2.m|]{../matlab_code/project_02_part2.m}
 
+\lstinputlisting[caption=\lstinline|project_02_part3.m|]{../matlab_code/project_02_part3.m}
 
+\lstinputlisting[caption=\lstinline|read_MKM_data.m|]{../matlab_code/read_MKM_data.m}
 
-\section{Testing of RANS Models: Computational Fluid Dynamics Code}
+\lstinputlisting[caption=\lstinline|ode_a12_SKE.m|]{../matlab_code/ode_a12_SKE.m}
 
-\subsection{}
-%%
-% Problem 4.1
-%%
+\lstinputlisting[caption=\lstinline|ode_a12_DKE.m|]{../matlab_code/ode_a12_DKE.m}
 
 %%
 %% DOCUMENT END

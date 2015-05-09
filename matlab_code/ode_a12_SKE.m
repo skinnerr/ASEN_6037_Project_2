@@ -16,4 +16,3 @@ dy(1) = -k * a12 * Sstar * sin(A(i) * Sstartau) - e;
 dy(2) = -Ce1 * e * a12 * Sstar * sin(A(i) * Sstartau) - Ce2 * e^2 / k;
 
 end
-

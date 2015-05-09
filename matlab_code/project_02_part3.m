@@ -17,7 +17,7 @@ dns_data{3} = csvread('../data/YuGirimaji_Fig14.txt',1,0);
 
 Cmu = 0.09;
 Sstar = 3.3;
-options = odeset('RelTol',1e-8);
+options = odeset('RelTol',1e-7);
 Sstartau_range = [0,50];
 A = [10,1,0.5,0.1,0.01];
 
@@ -58,26 +58,26 @@ legend(gca,'show','location','northeast');
 xlim([0,50]);
 ylim([-0.8,0.8]);
 
-for i = 1:length(A)
+for i = 1:3
     figure();
     hold on;
     % SKE Model
     init_cond = [1,1];
     [tvec,yvec] = ode45(@ode_a12_SKE,Sstartau_range,init_cond,options);
     a12 = -Cmu .* yvec(:,1) ./ yvec(:,2) .* Sstar .* sin(tvec .* A(i));
-    plot(tvec,a12*0.5,'DisplayName','SKE');
+    plot(tvec,a12,'DisplayName','SKE');
     % DKE Model
     init_cond = [1,1,0];
     [tvec,yvec] = ode45(@ode_a12_DKE,Sstartau_range,init_cond,options);
-    plot(tvec,yvec(:,3)*0.5,'DisplayName','DKE');
+    plot(tvec,yvec(:,3),'DisplayName','DKE');
     % DNS Results
     if i<4
-        plot(dns_data{i}(:,1),dns_data{i}(:,2),'DisplayName','DNS');
+        plot(dns_data{i}(:,1),2*dns_data{i}(:,2),'DisplayName','DNS');
     end
     % Annotation
     hold off;
     xlabel('Time (S* tau)');
-    ylabel('b_{12}');
+    ylabel('a_{12}');
     title(['omega/S = ',num2str(A(i))]);
     legend(gca,'show','location','northeast');
     % Set axis range.
@@ -86,14 +86,5 @@ for i = 1:length(A)
     else
         xlim([0,50]);
     end
-    ylim([-0.4,0.4]);
+    ylim([-0.8,0.8]);
 end
-
-
-
-
-
-
-
-
-
